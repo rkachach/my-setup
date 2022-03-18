@@ -6,69 +6,6 @@
 (global-unset-key [(control x) (control z)])
 (global-unset-key [(control return)])
 
-(defun kill-all-buffers ()
-  (interactive)
-  (mapc 'kill-buffer (buffer-list)))
-
-(defun kill-other-buffers ()
-  "Kill all other buffers."
-  (interactive)
-  (mapc 'kill-buffer
-        (delq (current-buffer)
-              (remove-if-not 'buffer-file-name (buffer-list)))))
-
-(defun kill-info-buffers()
-  (interactive)
-  (save-current-buffer
-    (progn
-      (setq orig-buffer (buffer-name))
-      (let (counter buffers-count)
-        (setq buffers-count (length info-buffers))
-        (setq counter 0)
-
-        (while (< counter buffers-count)
-          (when (get-buffer (nth counter info-buffers))
-            (message "Killing %s" (nth counter info-buffers))
-            (kill-buffer (get-buffer (nth counter info-buffers)))
-            )
-          (setq counter (+ counter 1))
-          )
-        )
-
-      ;; Check whether if we was in the killed buffer in this case move to the
-      ;; the other window and close all the remaining windows, else just close
-      ;; all the windows except the current one
-      (if (member orig-buffer info-buffers)
-          (progn
-            (other-window 1)
-            (delete-other-windows))
-          (delete-other-windows))
-
-    )))
-
-(defun kill-whitespace ()
-  "Kill the whitespace between two non-whitespace characters"
-  (interactive "*")
-  (save-excursion
-    (save-restriction
-      (save-match-data
-        (progn
-          (re-search-backward "[^ \t\r\n]" nil t)
-          (re-search-forward "[ \t\r\n]+" nil t)
-          (replace-match "" nil nil))))))
-
-(defun kill-and-join-forward (&optional arg)
-  "If at end of line, join with following; otherwise kill line.
-    Deletes whitespace at join."
-  (interactive "P")
-  (if (and (eolp) (not (bolp)))
-      (delete-indentation t)
-    (kill-line arg)))
-
-(defun switch-to-previous-buffer ()
-  (interactive)
-  (switch-to-buffer (other-buffer (current-buffer) 1)))
-
 (global-set-key [(control t)] 'indent-region)
 (global-set-key [(control z)] 'undo) 
 (global-set-key (kbd "C-z") 'undo)
