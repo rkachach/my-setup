@@ -4,7 +4,6 @@
   :bind-keymap ("C-p" . projectile-command-map)
   :bind (("C-c C-f" . helm-find-files))
   :config
-  (projectile-completion-system 'helm)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (helm-projectile-on)
-  (projectile-mode)
-  (projectile-global-mode))
+  (projectile-mode))

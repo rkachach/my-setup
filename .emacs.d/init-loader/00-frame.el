@@ -26,4 +26,6 @@
   :ensure t
   :demand
   :init
+  (powerline-default-theme)
+  (put 'erase-buffer 'disabled nil)
   (add-hook 'after-init-hook 'powerline-reset))

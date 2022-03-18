@@ -8,3 +8,4 @@ helm-adaptive-history
 *.el~
 projectile-bookmarks.eld
 projectile.cache
+bookmarks
