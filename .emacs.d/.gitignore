@@ -1,0 +1,10 @@
+*.elc
+TAGS
+.backup/
+.cache/
+auto-save-list/
+elpa
+helm-adaptive-history
+*.el~
+projectile-bookmarks.eld
+projectile.cache
