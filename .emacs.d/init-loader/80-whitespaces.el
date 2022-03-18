@@ -6,6 +6,5 @@
   :demand
   :preface (require 'helm-config)
   :config
-  (global-ethan-wspace-mode 1)
-  (mode-require-final-newline nil))) ;; disable this mode since the ethan-wspace takes care of it
-
+  (mode-require-final-newline nil)
+  (global-ethan-wspace-mode 1))) ;; disable this mode since the ethan-wspace takes care of it

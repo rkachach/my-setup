@@ -19,7 +19,6 @@
   :preface (require 'helm-config)
   :config
   (helm-adaptive-mode t)
-  (helm-fuzzier-mode 1)
   (helm-mode 1))
 
 (use-package helm-projectile

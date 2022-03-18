@@ -6,6 +6,17 @@
 (global-unset-key [(control x) (control z)])
 (global-unset-key [(control return)])
 
+(defun kill-whitespace ()
+  "Kill the whitespace between two non-whitespace characters"
+  (interactive "*")
+  (save-excursion
+    (save-restriction
+      (save-match-data
+        (progn
+          (re-search-backward "[^ \t\r\n]" nil t)
+          (re-search-forward "[ \t\r\n]+" nil t)
+          (replace-match "" nil nil))))))
+
 (defun kill-and-join-forward (&optional arg)
   "If at end of line, join with following; otherwise kill line.
     Deletes whitespace at join."
@@ -92,7 +103,6 @@
 (global-set-key (kbd "M-l") (quote copy-line))
 (global-set-key (kbd "M-k") 'my-kill-line)
 (global-set-key (kbd "M-t") 'helm-imenu)
-
 (global-set-key (kbd "C-x l") (lambda () (interactive) (insert "[]") (backward-char 1)))
 (global-set-key (kbd "C-x p") (lambda () (interactive) (insert "()") (backward-char 1)))
 (global-set-key (kbd "C-x ,") (lambda () (interactive) (insert "::")))
