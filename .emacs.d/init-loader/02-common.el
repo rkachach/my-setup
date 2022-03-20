@@ -5,6 +5,8 @@
 ;;;;
 ;;;; Copy & Pase stuff
 
+(setq info-buffers '("*Anaconda*" "*xref*" "*cscope*" "*Occur*" "*grep*" "*etags-select*" "*Output*" "*vc-diff*" "*vc-change-log*" "*Register List*" "* OmniSharp : Usages *" "*Diff*" "*Org Agenda*"))
+
 (defun kill-and-join-forward (&optional arg)
   "If at end of line, join with following; otherwise kill line.
     Deletes whitespace at join."

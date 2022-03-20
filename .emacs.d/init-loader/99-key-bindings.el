@@ -7,8 +7,7 @@
 (global-unset-key [(control return)])
 
 (global-set-key [(control t)] 'indent-region)
-(global-set-key [(control z)] 'undo) 
-(global-set-key (kbd "C-z") 'undo)
+(global-set-key [(control z)] 'undo)
 (global-set-key [(meta g)] 'goto-line)
 (global-set-key [(control return)] 'query-replace)
 (global-set-key [(meta return)] 'replace-regexp)
@@ -87,19 +86,3 @@
 (helm-adaptive-mode t) ;; Order commands by the frequency of use
 (global-set-key (kbd "C-x C-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x y") 'helm-flyspell-correct)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               TAGS
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; TAGS quick browing
-(global-set-key "\M-i" 'helm-etags-plus-select)
-;;(global-set-key "\M-i" 'etags-select-find-tag-at-point)
-;;(global-set-key "\C-p" 'pop-tag-mark)
-;;(global-set-key "\C-n" 'my-find-tag)
-(add-hook
- 'c++-mode-hook
- (lambda ()
-   (local-set-key (kbd "\C-n") 'my-find-tag)
-   (local-set-key (kbd "\C-p") 'pop-tag-mark)
-   ))
