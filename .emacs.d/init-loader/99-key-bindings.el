@@ -86,3 +86,4 @@
 (helm-adaptive-mode t) ;; Order commands by the frequency of use
 (global-set-key (kbd "C-x C-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x y") 'helm-flyspell-correct)
+(global-set-key (kbd "C-c l l") 'flycheck-list-errors)
