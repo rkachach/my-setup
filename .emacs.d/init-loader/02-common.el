@@ -162,3 +162,5 @@ ref `bounds-of-thing-at-point'."
 (defun switch-to-previous-buffer ()
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
+
+(defalias 'yes-or-no-p 'y-or-n-p)

@@ -3,7 +3,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package company
   :ensure t
-  :bind (("C-n" . company-select-next)
+  :bind (:map company-active-map
+	 ("C-n" . company-select-next)
 	 ("C-p" . company-select-previous)
 	 ("C-n" . company-select-next)
 	 ("C-p" . company-select-previous)
