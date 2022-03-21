@@ -115,7 +115,7 @@ ref `bounds-of-thing-at-point'."
       ; its enclosed-char are the same like " or ' chars.
       (backward-char 1) (setq mychar (thing-at-point 'char)) (forward-char 1)
       ; look forward for the enclosed char
-      (skip-chars-forward (concatenate 'string "^" (get-enc-char mychar))) (setq p2 (point))
+      (skip-chars-forward (concat "^" (get-enc-char mychar))) (setq p2 (point))
       ; only delete the region if we found the enclosed character
       (if (looking-at "[\]\}\"\'\)<>]") (kill-region p1 p2)))))
 
