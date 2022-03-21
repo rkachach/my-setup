@@ -4,6 +4,16 @@
 (load-theme 'monokai t)
 (set-face-attribute 'region nil :background "#8b7500")
 
+;; Customization
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(iedit-occurrence ((t (:inherit highlight :background "orange red"))))
+ '(isearch ((t (:background "yellow" :foreground "forest green"))))
+ '(lazy-highlight ((t (:background "yellow" :foreground "forest green" :inverse-video nil)))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Full screen Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
