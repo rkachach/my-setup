@@ -1,7 +1,6 @@
 #!/bin/python3
 
 import argparse
-from sys import argv
 from prettytable import PrettyTable
 from subprocess import check_output
 import os
@@ -29,10 +28,9 @@ def ls_merged_branches(branch_name):
 def show_branches(prefix, main_branch):
     table = PrettyTable()
     format_table(table)
-    G = "\033[0;32;40m" # GREEN
-    N = "\033[0m" # Reset
-    Y = "\033[0;33;40m" # Yellow
-    B = "\033[0;34;40m" # Blue
+    G = "\033[0;32;40m"  # GREEN
+    N = "\033[0m"        # Reset
+    Y = "\033[0;33;40m"  # Yellow
 
     branches = ls_all_branches()
     merged_branches = ls_merged_branches(main_branch)
@@ -59,9 +57,8 @@ def show_branches(prefix, main_branch):
         else:
             table.add_row([N+branch_name, desc, bmerged, cnt_commits+N])
 
-
-    # Done
     print(table)
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
