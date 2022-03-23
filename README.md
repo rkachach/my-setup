@@ -1,1 +1,1 @@
-# my-setup# my-setup
+This is my Emacs configuration.
