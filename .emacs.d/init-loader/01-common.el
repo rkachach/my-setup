@@ -164,3 +164,5 @@ ref `bounds-of-thing-at-point'."
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+(use-package highlight-parentheses)
