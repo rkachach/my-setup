@@ -2,6 +2,7 @@
 
 import argparse
 from prettytable import PrettyTable
+import subprocess
 from subprocess import check_output
 import os
 import sys
@@ -25,6 +26,14 @@ def ls_merged_branches(branch_name):
     except:
         sys.exit(1)
 
+def ls_local_not_tracked_branches():
+    try:
+        cmd = """git branch --format "%(refname:short) %(upstream)" | awk '{if (!$2) print $1;}'"""
+        output = subprocess.getoutput(cmd)
+        return output.split('\n')
+    except:
+        sys.exit(1)
+
 def show_branches(prefix, main_branch):
     table = PrettyTable()
     format_table(table)
@@ -34,28 +43,30 @@ def show_branches(prefix, main_branch):
 
     branches = ls_all_branches()
     merged_branches = ls_merged_branches(main_branch)
+    local_branches = ls_local_not_tracked_branches()
 
     for branch in branches.splitlines():
+        branch = branch.strip()
         if prefix not in branch:
             continue
 
-        merged = branch in merged_branches
+        merged = (branch in merged_branches) and (branch not in local_branches)
         curr_branch = '*' in branch
         branch_name = branch.strip() if not curr_branch else branch.strip().split(' ')[1]
-        cnt_commits = check_output(['git', 'rev-list', f'{main_branch}..{branch_name}', '--count']).decode('utf').strip()
+        cnt_commits = int(check_output(['git', 'rev-list', f'{main_branch}..{branch_name}', '--count']).decode('utf').strip())
         try:
             output = check_output(['git', 'config', f'branch.{branch_name}.description']).decode('utf')
             desc = os.linesep.join([s for s in output.splitlines() if s])
         except:
             desc = '---'
 
-        bmerged = "YES" if merged else "NO"
+        bmerged = "YES" if (merged) else "NO"
         if curr_branch:
-            table.add_row([G+branch_name, desc, bmerged, cnt_commits+N])
+            table.add_row([G+branch_name, desc, bmerged, f'{cnt_commits}'+N])
         elif merged:
-            table.add_row([Y+branch_name, desc, bmerged, cnt_commits+N])
+            table.add_row([Y+branch_name, desc, bmerged, f'{cnt_commits}'+N])
         else:
-            table.add_row([N+branch_name, desc, bmerged, cnt_commits+N])
+            table.add_row([N+branch_name, desc, bmerged, f'{cnt_commits}'+N])
 
     print(table)
 
