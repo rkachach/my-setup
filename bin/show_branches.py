@@ -6,6 +6,7 @@ import subprocess
 from subprocess import check_output
 import os
 import sys
+import re
 
 def format_table(table):
     table.field_names = ["branch", "description", "merged", "commits"]
@@ -34,17 +35,21 @@ def ls_local_not_tracked_branches():
     except:
         sys.exit(1)
 
+def remove_empty_lines(input_str):
+    return os.linesep.join([s for s in input_str.splitlines() if s])
+
 def get_branch_description(branch_name):
     try:
         # First, we try to use any description set by the user
         out = check_output(['git', 'config', f'branch.{branch_name}.description']).decode('utf')
-        return os.linesep.join([s for s in out.splitlines() if s])
+        return remove_empty_lines(out)
     except:
         # No user desc is available, let's use the last commit description
-        d = check_output(['git', 'log', '--oneline', '-n',  '1', f'{branch_name}']).decode('utf')
-        if d:
-            desc = (d[12:65] + '..') if len(d) > 65 else d  # 12: to skip hash
-            return desc
+        out = check_output(['git', 'log', '--oneline', '-n',  '1', f'{branch_name}']).decode('utf')
+        out = remove_empty_lines(out)
+        if out:
+            msg = re.search('[0-9a-fA-F]+ (.+)', out).groups()[0] #  skip rev hash
+            return (msg[0:50] + '..') if len(msg) > 50 else msg
         else:
             return "---"
 
