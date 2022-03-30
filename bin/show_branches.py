@@ -48,6 +48,11 @@ def get_branch_description(branch_name):
         else:
             return "---"
 
+def get_default_branch():
+    cmd = """git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'"""
+    output = subprocess.getoutput(cmd)
+    return os.linesep.join([s for s in output.splitlines() if s])
+
 def show_branches(prefix, main_branch):
     table = PrettyTable()
     format_table(table)
@@ -86,6 +91,6 @@ def show_branches(prefix, main_branch):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--prefix', default='')
-    parser.add_argument('-b', '--branch', help='main branch', default='master')
+    parser.add_argument('-b', '--branch', help='main branch', default=get_default_branch())
     args = parser.parse_args()
     show_branches(args.prefix, args.branch)
