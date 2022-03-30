@@ -34,6 +34,20 @@ def ls_local_not_tracked_branches():
     except:
         sys.exit(1)
 
+def get_branch_description(branch_name):
+    try:
+        # First, we try to use any description set by the user
+        out = check_output(['git', 'config', f'branch.{branch_name}.description']).decode('utf')
+        return os.linesep.join([s for s in out.splitlines() if s])
+    except:
+        # No user desc is available, let's use the last commit description
+        d = check_output(['git', 'log', '--oneline', '-n',  '1', f'{branch_name}']).decode('utf')
+        if d:
+            desc = (d[12:65] + '..') if len(d) > 65 else d  # 12: to skip hash
+            return desc
+        else:
+            return "---"
+
 def show_branches(prefix, main_branch):
     table = PrettyTable()
     format_table(table)
@@ -56,11 +70,7 @@ def show_branches(prefix, main_branch):
         curr_branch = '*' in branch
         branch_name = branch.strip() if not curr_branch else branch.strip().split(' ')[1]
         cnt_commits = int(check_output(['git', 'rev-list', f'{main_branch}..{branch_name}', '--count']).decode('utf').strip())
-        try:
-            output = check_output(['git', 'config', f'branch.{branch_name}.description']).decode('utf')
-            desc = os.linesep.join([s for s in output.splitlines() if s])
-        except:
-            desc = '---'
+        desc = get_branch_description(branch_name)
 
         bmerged = "YES" if (merged) else "NO"
         if curr_branch:
