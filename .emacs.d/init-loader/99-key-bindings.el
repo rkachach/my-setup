@@ -87,5 +87,3 @@
 (global-set-key (kbd "C-x C-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x y") 'helm-flyspell-correct)
 (global-set-key (kbd "C-c l l") 'flycheck-list-errors)
-
-(global-set-key (kbd "C-c C-7") 'backward-up-list)

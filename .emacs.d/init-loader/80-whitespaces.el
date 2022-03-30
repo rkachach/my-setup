@@ -7,4 +7,4 @@
   :preface (require 'helm-config)
   :config
   (setq mode-require-final-newline nil)
-  (global-ethan-wspace-mode 1)) ;; disable this mode since the ethan-wspace takes care of it
+  (global-ethan-wspace-mode 1))
