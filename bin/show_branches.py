@@ -50,7 +50,9 @@ def show_branches(prefix, main_branch):
         if prefix not in branch:
             continue
 
-        merged = (branch in merged_branches) and (branch not in local_branches)
+        merged = (branch in merged_branches)\
+        and (branch not in local_branches)\
+        and (branch != main_branch)
         curr_branch = '*' in branch
         branch_name = branch.strip() if not curr_branch else branch.strip().split(' ')[1]
         cnt_commits = int(check_output(['git', 'rev-list', f'{main_branch}..{branch_name}', '--count']).decode('utf').strip())
