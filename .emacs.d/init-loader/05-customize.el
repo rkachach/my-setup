@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(highlight-parentheses helm-flyspell flycheck-mypy magit dired-efap yasnippet lsp-ui which-key lsp-mode diff-hl company-tabnine company-quickhelp company-anaconda anaconda-mode company ethan-wspace powerline helm-core projectile-ripgrep projectile monokai-theme init-loader use-package))
+   '(doom-themes highlight-indent-guides highlight-parentheses helm-flyspell flycheck-mypy magit dired-efap yasnippet lsp-ui which-key lsp-mode diff-hl company-tabnine company-quickhelp company-anaconda anaconda-mode company ethan-wspace powerline helm-core projectile-ripgrep projectile monokai-theme init-loader use-package))
  '(projectile-enable-caching t)
  '(show-paren-mode t))
 (custom-set-faces

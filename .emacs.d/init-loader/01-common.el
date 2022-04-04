@@ -5,7 +5,17 @@
 ;;;;
 ;;;; Copy & Pase stuff
 
-(setq info-buffers '("*Anaconda*" "*xref*" "*cscope*" "*Occur*" "*grep*" "*etags-select*" "*Output*" "*vc-diff*" "*vc-change-log*" "*Register List*" "* OmniSharp : Usages *" "*Diff*" "*Org Agenda*"))
+(setq info-buffers '("*Anaconda*"
+		     "*Flycheck errors*"
+		     "*xref*" "*cscope*"
+		     "*Occur*" "*grep*"
+		     "*etags-select*"
+		     "*Flycheck errors*"
+		     "*Output*"
+		     "*vc-diff*"
+		     "*vc-change-log*"
+		     "*Register List*"
+		     "*Diff*" "*Org Agenda*"))
 
 (defun kill-and-join-forward (&optional arg)
   "If at end of line, join with following; otherwise kill line.
