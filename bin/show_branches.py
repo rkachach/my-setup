@@ -8,6 +8,7 @@ import os
 import sys
 import re
 
+
 def format_table(table):
     table.field_names = ["branch", "description", "merged", "commits"]
     table.align["branch"] = "l"
@@ -15,17 +16,20 @@ def format_table(table):
     table.align["merged"] = "l"
     table.align["commits"] = "l"
 
+
 def ls_all_branches():
     try:
         return check_output(['git', 'branch']).decode('utf')
     except:
         sys.exit(1)
 
+
 def ls_merged_branches(branch_name):
     try:
         return check_output(['git', 'branch', '--merged', branch_name]).decode('utf')
     except:
         sys.exit(1)
+
 
 def ls_local_not_tracked_branches():
     try:
@@ -35,8 +39,10 @@ def ls_local_not_tracked_branches():
     except:
         sys.exit(1)
 
+
 def remove_empty_lines(input_str):
     return os.linesep.join([s for s in input_str.splitlines() if s])
+
 
 def get_branch_description(branch_name):
     try:
@@ -53,10 +59,12 @@ def get_branch_description(branch_name):
         else:
             return "---"
 
+
 def get_default_branch():
     cmd = """git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'"""
     output = subprocess.getoutput(cmd)
     return os.linesep.join([s for s in output.splitlines() if s])
+
 
 def show_branches(prefix, main_branch):
     table = PrettyTable()
@@ -68,27 +76,26 @@ def show_branches(prefix, main_branch):
     branches = ls_all_branches()
     merged_branches = ls_merged_branches(main_branch)
     local_branches = ls_local_not_tracked_branches()
+    master_branch = get_default_branch()
 
     for branch in branches.splitlines():
         branch = branch.strip()
         if prefix not in branch:
             continue
 
-        merged = (branch in merged_branches)\
-        and (branch not in local_branches)\
-        and (branch != main_branch)
         curr_branch = '*' in branch
-        branch_name = branch.strip() if not curr_branch else branch.strip().split(' ')[1]
-        cnt_commits = int(check_output(['git', 'rev-list', f'{main_branch}..{branch_name}', '--count']).decode('utf').strip())
-        desc = get_branch_description(branch_name)
+        branch = branch.replace('* ', '') # remove curr branch indicator
+        merged = (branch in merged_branches) and (branch not in local_branches) and (branch != master_branch)
+        cnt_commits = int(check_output(['git', 'rev-list', f'{main_branch}..{branch}', '--count']).decode('utf').strip())
+        desc = get_branch_description(branch)
 
         bmerged = "YES" if (merged) else "NO"
         if curr_branch:
-            table.add_row([G+branch_name, desc, bmerged, f'{cnt_commits}'+N])
+            table.add_row([G+branch, desc, bmerged, f'{cnt_commits}'+N])
         elif merged:
-            table.add_row([Y+branch_name, desc, bmerged, f'{cnt_commits}'+N])
+            table.add_row([Y+branch, desc, bmerged, f'{cnt_commits}'+N])
         else:
-            table.add_row([N+branch_name, desc, bmerged, f'{cnt_commits}'+N])
+            table.add_row([N+branch, desc, bmerged, f'{cnt_commits}'+N])
 
     print(table)
 

@@ -71,7 +71,7 @@
 (global-set-key (kbd "M-t") 'helm-imenu)
 (global-set-key (kbd "C-x l") (lambda () (interactive) (insert "[]") (backward-char 1)))
 (global-set-key (kbd "C-x p") (lambda () (interactive) (insert "()") (backward-char 1)))
-(global-set-key (kbd "C-x ,") (lambda () (interactive) (insert "::")))
+(global-set-key (kbd "C-x ,") (lambda () (interactive) (insert "''")))
 (global-set-key (kbd "C-x c") (lambda () (interactive) (insert "{}") (backward-char 1)))
 (global-set-key (kbd "C-x n") (lambda () (interactive) (insert "\"\"")(backward-char 1)))
 (global-set-key (kbd "C-c h") 'kill-whitespace)
