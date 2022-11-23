@@ -25,3 +25,6 @@
     (setq gc-cons-threshold (* 64 1024 1024))
     (init-loader-load)
     (setq gc-cons-threshold (* 10 1024 1024))))
+(put 'narrow-to-region 'disabled nil)
+(global-ethan-wspace-mode)
+(global-ethan-wspace-mode 1)

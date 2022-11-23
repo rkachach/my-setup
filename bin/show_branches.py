@@ -61,6 +61,7 @@ def get_branch_description(branch_name):
 
 
 def get_default_branch():
+    return 'main'
     cmd = """git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'"""
     output = subprocess.getoutput(cmd)
     return os.linesep.join([s for s in output.splitlines() if s])
