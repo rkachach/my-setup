@@ -49,7 +49,7 @@ def get_branch_description(branch_name):
         # First, we try to use any description set by the user
         out = check_output(['git', 'config', f'branch.{branch_name}.description']).decode('utf')
         return remove_empty_lines(out)
-    except:
+    except Exception:
         # No user desc is available, let's use the last commit description
         out = check_output(['git', 'log', '--oneline', '-n',  '1', f'{branch_name}']).decode('utf')
         out = remove_empty_lines(out)
@@ -59,9 +59,18 @@ def get_branch_description(branch_name):
         else:
             return "---"
 
+def main_branch_exists():
+    try:
+        result = subprocess.run(['git', 'show-branch', 'main'],
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE).returncode
+        return (result == 0)
+    except Exception:
+        return False
+
 
 def get_default_branch():
-    return 'main'
+    if (main_branch_exists()):
+        return 'main'
     cmd = """git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'"""
     output = subprocess.getoutput(cmd)
     return os.linesep.join([s for s in output.splitlines() if s])
