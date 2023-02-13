@@ -54,7 +54,7 @@ def get_branch_description(branch_name):
         out = check_output(['git', 'log', '--oneline', '-n',  '1', f'{branch_name}']).decode('utf')
         out = remove_empty_lines(out)
         if out:
-            msg = re.search('[0-9a-fA-F]+ (.+)', out).groups()[0] #  skip rev hash
+            msg = re.search('[0-9a-fA-F]+ (.+)', out).groups()[0]  # skip rev hash
             return (msg[0:50] + '..') if len(msg) > 50 else msg
         else:
             return "---"
@@ -94,7 +94,7 @@ def show_branches(prefix, main_branch):
             continue
 
         curr_branch = '*' in branch
-        branch = branch.replace('* ', '') # remove curr branch indicator
+        branch = branch.replace('* ', '')  # remove curr branch indicator
         merged = (branch in merged_branches) and (branch not in local_branches) and (branch != master_branch)
         cnt_commits = int(check_output(['git', 'rev-list', f'{main_branch}..{branch}', '--count']).decode('utf').strip())
         desc = get_branch_description(branch)
