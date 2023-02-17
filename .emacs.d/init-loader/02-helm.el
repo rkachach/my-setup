@@ -15,7 +15,7 @@
 	 ("C-x y" . 'helm-flyspell-correct)
 	 ("C-x C-n" . 'helm-swoop)) ;; TODO: fixme not defined
 
-  :preface (require 'helm-config)
+  :preface
   :config
   (setq helm-split-window-inside-p            t ; open helm buffer inside current window, not occupy whole other window
 	helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.

@@ -3,6 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(magit-section-initial-visibility-alist '((unpushed . show) (stashes . show) (commit . show)))
  '(package-selected-packages
    '(go-mode rust-mode helm-projectile yaml-imenu yaml flycheck-yamllint doom-themes highlight-indent-guides highlight-parentheses helm-flyspell flycheck-mypy magit dired-efap yasnippet lsp-ui which-key lsp-mode diff-hl company-tabnine company-quickhelp company-anaconda anaconda-mode company ethan-wspace powerline helm-core projectile-ripgrep monokai-theme init-loader use-package))
  '(projectile-enable-caching t)
